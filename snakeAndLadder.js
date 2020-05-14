@@ -5,6 +5,8 @@ console.log("Welcome To Snake And Ladder")
 const NO_PLAY=0
 const LADDER=1
 const SNAKE=2
+const STARTING_POSITION=0
+const WINNING_POSITION=100
 
 //variables
 let playerPosition=0
@@ -31,5 +33,22 @@ function setPlayerMoves()
             playerPosition = playerPosition - dieValue
             break;
     }
+    resetingWrongPosition()
+    console.log("Player Position : " + playerPosition)
 }
-setPlayerMoves()
+
+function playUntilWin()
+{
+	while( playerPosition <= $WINNING_POSITION )
+        setPlayerMoves()
+        
+}
+
+function resetingWrongPosition()
+{
+	if( playerPosition < STARTING_POSITION )
+        playerPosition = STARTING_POSITION
+}
+
+//Start game
+playUntilWin
