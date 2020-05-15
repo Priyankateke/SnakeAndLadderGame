@@ -10,6 +10,7 @@ const WINNING_POSITION=100
 
 //variables
 let playerPosition=0
+let dieValue
 
 /**
  *Function to set playerPosition according to playing Options like NO_Play or Snake or Ladder 
@@ -17,7 +18,7 @@ let playerPosition=0
 function setPlayerMoves()
 {
     //die value between 1 to 6
-    let dieValue = Math.floor(Math.random()*6 + 1)
+    dieValue = Math.floor(Math.random()*6 + 1)
     //Playing Options
     let playingOptions = Math.floor(Math.random()*3)
 
@@ -34,21 +35,23 @@ function setPlayerMoves()
             break;
     }
     resetingWrongPosition()
-    console.log("Player Position : " + playerPosition)
 }
 
 function playUntilWin()
 {
-	while( playerPosition <= $WINNING_POSITION )
-        setPlayerMoves()
-        
+    while( playerPosition != WINNING_POSITION ) {
+        setPlayerMoves()  
+    }
+          
 }
 
 function resetingWrongPosition()
 {
 	if( playerPosition < STARTING_POSITION )
         playerPosition = STARTING_POSITION
+    else if( playerPosition > WINNING_POSITION ) 
+        playerPosition = playerPosition - dieValue
 }
 
 //Start game
-playUntilWin
+playUntilWin()
