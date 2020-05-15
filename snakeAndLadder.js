@@ -9,8 +9,12 @@ const STARTING_POSITION=0
 const WINNING_POSITION=100
 
 //variables
-let playerPosition=0
 let dieValue
+let playerPosition=0
+let diceRoll = 0
+
+//dictionary
+var gameRecords = {};
 
 /**
  *Function to set playerPosition according to playing Options like NO_Play or Snake or Ladder 
@@ -21,6 +25,9 @@ function setPlayerMoves()
     dieValue = Math.floor(Math.random()*6 + 1)
     //Playing Options
     let playingOptions = Math.floor(Math.random()*3)
+
+    //Count dice rolls
+    diceRoll++
 
 	//Move player Position according to playingOptions
 	switch(playingOptions) {
@@ -35,16 +42,24 @@ function setPlayerMoves()
             break;
     }
     resetingWrongPosition()
+
+    //store in dictionary : dice count and player position
+    gameRecords['DiceRoll : '+diceRoll] = playerPosition
 }
 
+/**
+ * play till get winning position 100
+ */
 function playUntilWin()
 {
     while( playerPosition != WINNING_POSITION ) {
         setPlayerMoves()  
-    }
-          
+    }  
 }
 
+/**
+ * Ensure player position between 0 to 100
+ */
 function resetingWrongPosition()
 {
 	if( playerPosition < STARTING_POSITION )
