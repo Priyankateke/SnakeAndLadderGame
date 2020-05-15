@@ -2,16 +2,20 @@
 console.log("Welcome To Snake And Ladder")
 
 //constants
-const NO_PLAY=0
-const LADDER=1
-const SNAKE=2
-const STARTING_POSITION=0
-const WINNING_POSITION=100
+const NO_PLAY = 0
+const LADDER = 1
+const SNAKE = 2
+const STARTING_POSITION = 0
+const WINNING_POSITION = 100
 
 //variables
 let dieValue
-let playerPosition=0
 let diceRoll = 0
+let player = 2
+let playerPosition = STARTING_POSITION
+playerOnePosition = STARTING_POSITION
+playerTwoPosition = STARTING_POSITION
+
 
 //dictionary
 var gameRecords = {};
@@ -26,9 +30,6 @@ function setPlayerMoves()
     //Playing Options
     let playingOptions = Math.floor(Math.random()*3)
 
-    //Count dice rolls
-    diceRoll++
-
 	//Move player Position according to playingOptions
 	switch(playingOptions) {
         case NO_PLAY: 
@@ -36,15 +37,21 @@ function setPlayerMoves()
             break;
         case LADDER: 
             playerPosition = playerPosition + dieValue
+            //Ensures playerPosition is not greater than winning position
+			if( playerPosition > WINNING_POSITION ) {
+				playerPosition -= dieValue
+            }
             break;
         case SNAKE:
             playerPosition = playerPosition - dieValue
+            //Ensures playerPosition is not less than starting position
+			if( playerPosition < STARTING_POSITION ) {
+				playerPosition = STARTING_POSITION
+            }
             break;
     }
-    resetingWrongPosition()
-
-    //store in dictionary : dice count and player position
-    gameRecords['DiceRoll : '+diceRoll] = playerPosition
+    //store in dictionary : player : player position and dice Count
+    gameRecords['Player : '+player] = playerPosition, diceRoll
 }
 
 /**
@@ -53,19 +60,29 @@ function setPlayerMoves()
 function playUntilWin()
 {
     while( playerPosition != WINNING_POSITION ) {
-        setPlayerMoves()  
+       switchPlayer() 
     }  
+    console.log("Player : " + player + " won")
 }
 
 /**
- * Ensure player position between 0 to 100
+ * switch Player
  */
-function resetingWrongPosition()
+function switchPlayer()
 {
-	if( playerPosition < STARTING_POSITION )
-        playerPosition = STARTING_POSITION
-    else if( playerPosition > WINNING_POSITION ) 
-        playerPosition = playerPosition - dieValue
+	if ( player == 1 ) {
+		player = 2
+		playerPosition = playerTwoPosition
+		setPlayerMoves()
+        playerTwoPosition = playerPosition
+    }
+	else {
+		player = 1
+		diceRoll++
+		playerPosition = playerOnePosition
+		setPlayerMoves()
+		playerOnePosition = playerPosition
+    }
 }
 
 //Start game
