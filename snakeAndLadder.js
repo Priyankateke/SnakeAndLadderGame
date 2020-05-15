@@ -72,14 +72,14 @@ function switchPlayer()
     if ( player == 1 ) {
         player = 2
         playerPosition = playerTwoPosition
-		setPlayerMoves()
+        setPlayerMoves()
         playerTwoPosition = playerPosition
     }
     else {
         player = 1
         diceRoll++
         playerPosition = playerOnePosition
-		setPlayerMoves()
+        setPlayerMoves()
         playerOnePosition = playerPosition
     }
 }
