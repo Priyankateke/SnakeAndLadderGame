@@ -34,21 +34,21 @@ function setPlayerMoves()
         case NO_PLAY: 
             playerPosition = playerPosition
             break;
-        case LADDER: 
+        case LADDER:
             playerPosition = playerPosition + dieValue
             //Ensures playerPosition is not greater than winning position
-			if( playerPosition > WINNING_POSITION ) {
-				playerPosition -= dieValue
+            if( playerPosition > WINNING_POSITION ) {
+                playerPosition -= dieValue
             }
             break;
         case SNAKE:
             playerPosition = playerPosition - dieValue
             //Ensures playerPosition is not less than starting position
-			if( playerPosition < STARTING_POSITION ) {
-				playerPosition = STARTING_POSITION
+            if( playerPosition < STARTING_POSITION ) {
+                playerPosition = STARTING_POSITION
             }
             break;
-    }
+        }
     //store in dictionary : player : player position and dice Count
     gameRecords['Player : '+player] = playerPosition, diceRoll
 }
@@ -59,8 +59,8 @@ function setPlayerMoves()
 function playUntilWin()
 {
     while( playerPosition != WINNING_POSITION ) {
-       switchPlayer() 
-    }  
+        switchPlayer()
+    }
     console.log("Player : " + player + " won")
 }
 
@@ -69,18 +69,18 @@ function playUntilWin()
  */
 function switchPlayer()
 {
-	if ( player == 1 ) {
-		player = 2
-		playerPosition = playerTwoPosition
+    if ( player == 1 ) {
+        player = 2
+        playerPosition = playerTwoPosition
 		setPlayerMoves()
         playerTwoPosition = playerPosition
     }
-	else {
-		player = 1
-		diceRoll++
-		playerPosition = playerOnePosition
+    else {
+        player = 1
+        diceRoll++
+        playerPosition = playerOnePosition
 		setPlayerMoves()
-		playerOnePosition = playerPosition
+        playerOnePosition = playerPosition
     }
 }
 
