@@ -16,7 +16,6 @@ let playerPosition = STARTING_POSITION
 playerOnePosition = STARTING_POSITION
 playerTwoPosition = STARTING_POSITION
 
-
 //dictionary
 var gameRecords = {};
 
