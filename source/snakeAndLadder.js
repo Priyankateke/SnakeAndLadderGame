@@ -48,7 +48,10 @@ class SnakeAndLadder {
                 break;
             }
             //store in dictionary : player : player position and dice Count
-            gameRecords['Player : '+player] = playerPosition, diceRoll
+
+            gameRecords['Player : '+player] = new Array();
+            gameRecords['Player : '+player].push(playerPosition)
+            gameRecords['Player : '+player].push(diceRoll)
         }
         
         /**
@@ -59,6 +62,8 @@ class SnakeAndLadder {
                 this.switchPlayer()
             }
             console.log("Player : " + player + " won")
+            console.log("Winning Position , number of times dice rolled")
+            console.log(gameRecords['Player : '+player])
         }
         
         /**
